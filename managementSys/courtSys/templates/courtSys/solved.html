@@ -1,0 +1,79 @@
+{% extends 'courtSys/base.html' %}
+
+{% load static %}
+
+{% block title %} Solved Cases - Dashboard {% endblock %}
+
+{% block content %}
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Solved Cases</h1>
+      <a href="#" class="d-Solvedne d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+      <!-- Solved Cases -->
+      <div class="col-xl-12 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row Solved-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Solved Cases</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{solved_cases_count}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Display solved Cases -->
+    <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Solved Case Files</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Case No.</th>
+              <th>Accuser</th>
+              <th>Defendant</th>
+              <th>Status</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Case No.</th>
+              <th>Accuser</th>
+              <th>Defendant</th>
+              <th>Status</th>
+              <th>Details</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {% for case in solved_cases %}
+            <tr>
+              <td>{{case.id}}</td>
+              <td>{{case.accuser_name}}</td>
+              <td>{{case.defendant_name}}</td>
+              <td>{{case.status}}</td>
+              <td><a href="{% url 'case_detail' pk=case.pk %}" <button class='btn btn-primary'>Details</button></a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+
+{% endblock content %}
